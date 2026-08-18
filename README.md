@@ -1,6 +1,6 @@
 # Five Core Agent Workflow Patterns - AI SDK Lab
 
-This is a beginner-friendly starter repository for **Module 1 Lab: Build Five Agent Workflow Patterns** in the **AI Agentic Engineering & Forward Deployed Engineering (FDE)** course.
+This repository is my **Module 1 Lab: Build Five Agent Workflow Patterns** for the **AI Agentic Engineering & Forward Deployed Engineering (FDE)** course.
 
 The assignment requires five patterns built **from scratch with the AI SDK**, without an agent framework:
 
@@ -10,18 +10,18 @@ The assignment requires five patterns built **from scratch with the AI SDK**, wi
 4. Orchestrator-Worker
 5. Evaluator-Optimizer
 
-The code is intentionally kept as small TypeScript programs. You can see every LLM call and the TypeScript logic connecting those calls.
+I kept each implementation as a small TypeScript program so every model call and the logic connecting those calls remain visible.
 
-> Do not submit this project blindly. Run it, study one pattern at a time, keep genuine execution evidence, and write the reflection from your real experience.
+I am studying and testing one pattern at a time. Successful runs are saved under `logs/` as genuine execution evidence.
 
-## 0. What is already included?
+## 0. Project structure
 
 | Location | Purpose |
 |---|---|
-| `README.md` | Your complete setup, learning, testing, and submission instructions |
-| `AGENTS.md` | Tells Codex how to help without violating the assignment |
-| `ASSIGNMENT_BRIEF.md` | A clean summary of the attached course brief |
-| `REFLECTION.md` | A template to complete from your real experience |
+| `README.md` | Project setup, implementation notes, testing, and submission instructions |
+| `AGENTS.md` | Project assistance and assignment guardrails |
+| `ASSIGNMENT_BRIEF.md` | Summary of the course requirements |
+| `REFLECTION.md` | Reflection based on my actual experience |
 | `.env.example` | Safe template for local API settings |
 | `package.json` and `tsconfig.json` | Project packages, commands, and TypeScript settings |
 | `src/lib/` | Shared model connection and logging helpers |
@@ -29,7 +29,7 @@ The code is intentionally kept as small TypeScript programs. You can see every L
 | `src/run-all.ts` | Optional command that runs all five patterns |
 | `logs/` and `screenshots/` | Folders for genuine run evidence |
 
-Each pattern has a working implementation structure. You still need to install the software, add your API key, run each command, understand the code, and complete the reflection.
+Each pattern has its own implementation and npm command. I run them individually so failures are easier to understand and each successful result has its own log.
 
 ## 1. Install the required software
 
@@ -40,7 +40,6 @@ You need:
 - [Git](https://git-scm.com/)
 - A GitHub account
 - A SharedLLM virtual API key with course-provided credits
-- Recommended: Codex in VS Code
 
 After installing Node.js and Git, open Terminal and run:
 
@@ -52,7 +51,7 @@ git --version
 
 If `node --version` is lower than 22, update Node.js before continuing.
 
-## 2. Open the starter in VS Code
+## 2. Open the project in VS Code
 
 1. Download and unzip this starter.
 2. Open VS Code.
@@ -94,7 +93,7 @@ Next, check the code without making API calls:
 npm run typecheck
 ```
 
-If this command succeeds, TypeScript found no type errors. If it fails, copy the complete error into Codex and ask for a simple explanation before making a fix.
+If this command succeeds, TypeScript found no type errors. If it fails, I read the complete error before making a focused fix.
 
 ## 4. Create the API environment file
 
@@ -245,7 +244,7 @@ The `for` loop creates the feedback cycle. The score threshold decides success, 
 
 ## 8. Tiny TypeScript glossary
 
-Use this before asking Codex for the full line-by-line explanation:
+These are the TypeScript features used throughout the five implementations:
 
 | Syntax | Beginner meaning |
 |---|---|
@@ -264,112 +263,48 @@ Use this before asking Codex for the full line-by-line explanation:
 | `Promise.all()` | Waits for multiple asynchronous operations together. |
 | `return` | Sends a value back to the caller of a function. |
 
-## 9. Continue with Codex in VS Code
+## 9. Implementation notes from real testing
 
-`AGENTS.md` gives Codex permanent instructions for this project. Begin with:
+### SharedLLM connection
 
-```text
-Read AGENTS.md, ASSIGNMENT_BRIEF.md, README.md, package.json, and every file under src before changing anything.
+This project uses the AI SDK OpenAI provider with SharedLLM's OpenAI-compatible gateway. SharedLLM authenticates requests with `X-SharedLLM-Key`, so `src/lib/ai.ts` removes the provider's normal `Authorization` header before sending a request. The key itself is loaded from `.env` and is never stored in the source code.
 
-This is my Module 1 lab and I am a beginner. First explain the repository structure and show how each of the five files maps to the assignment. Do not replace the visible workflow logic with ToolLoopAgent or any agent framework. Then run npm run typecheck. Explain any error in simple language and make only necessary fixes.
-```
+### Structured output with `gpt-oss:20b`
 
-Then study one pattern at a time.
+During testing, the Routing and Orchestrator-Worker planning calls initially failed with `No object generated` errors. The model sometimes wrapped JSON in Markdown or returned property names that did not match the Zod schema.
 
-### Codex prompt for Pattern 1
+For Routing, I added `extractJsonMiddleware()`, made the expected `route` and `reason` property names explicit, and kept Zod validation before TypeScript selects a specialist.
 
-```text
-Focus only on src/patterns/01-prompt-chaining.ts. Explain every important line from the ground up, including import, const, async, await, generateText, model, system, prompt, variables, template strings, .text, and return. Show exactly where the first output becomes the second input. Then run npm run chain. If it works, do not rewrite it unnecessarily.
-```
+For Orchestrator-Worker, I used the same JSON middleware and explicit property instructions. SharedLLM later returned a plan that looked valid but was still rejected by the provider adapter, so I added a narrow fallback that uses `JSON.parse()` followed by `planSchema.safeParse()`. The workflow continues only when the same Zod schema confirms the plan is valid.
 
-### Codex prompt for Pattern 2
+These changes are limited to provider compatibility. The five workflow patterns still use direct AI SDK calls and visible TypeScript orchestration rather than an agent framework.
 
-```text
-Focus only on src/patterns/02-routing.ts. Explain the schema, Output.object, z.object, z.enum, type, Record, and how the classifier output becomes a TypeScript route. Explain why application code performs the route. Then run npm run route and fix only verified errors.
-```
+### Testing and evidence
 
-### Codex prompt for Pattern 3
+I run `npm run typecheck` before and after code changes. I then run each pattern separately and keep only real terminal output in `logs/`. Failed attempts are described honestly rather than being presented as successful evidence.
 
-```text
-Focus only on src/patterns/03-parallelization.ts. Explain arrays, map, the async arrow function, promises, and Promise.all from the beginning. Show why the three LLM tasks are independent. Then run npm run parallel. Keep the from-scratch pattern recognizable.
-```
+## 10. Reflection
 
-### Codex prompt for Pattern 4
+`REFLECTION.md` is completed only after all five patterns have been run. It records the actual problems I encountered, including SharedLLM authentication, structured JSON parsing, schema validation, and the differences between fixed and dynamic workers.
 
-```text
-Focus only on src/patterns/04-orchestrator-worker.ts. Explain the orchestrator schema, how subtasks are created dynamically, how map creates worker calls, how Promise.all runs workers, JSON.stringify, and how the final merge works. Then run npm run orchestrate and fix only verified errors.
-```
+## 11. Final review
 
-### Codex prompt for Pattern 5
+Before submission, I verify that:
 
-```text
-Focus only on src/patterns/05-evaluator-optimizer.ts. Explain the initial draft, for loop, evaluation number, score threshold, maximum evaluations, break, revision call, and how feedback is passed into the next draft. Then run npm run evaluate and fix only verified errors.
-```
+1. All five required patterns use direct AI SDK calls.
+2. The orchestration logic remains visible in TypeScript.
+3. `npm run typecheck` passes.
+4. Every individual pattern command succeeds.
+5. Genuine execution logs or screenshots exist for all five patterns.
+6. The README explains how each implementation matches the assignment.
+7. `REFLECTION.md` contains only my real experience.
+8. `.env` is ignored and no API key is tracked by Git.
 
-## 10. Complete the reflection honestly
+## 12. GitHub repository
 
-After you have run all five patterns, open `REFLECTION.md` and answer from your real experience. Codex can improve grammar, but it must not invent challenges or lessons.
+I use Git checkpoints after each completed pattern so working progress and genuine logs are preserved. The project is available at [Navyaimmadi/-ai-agent-workflow-patterns-starter](https://github.com/Navyaimmadi/-ai-agent-workflow-patterns-starter).
 
-Suggested Codex prompt:
-
-```text
-Ask me one question at a time about what happened while I built and ran this lab. Use my answers to help me complete REFLECTION.md in simple, natural language. Do not invent anything I did not tell you.
-```
-
-## 11. Ask Codex for a strict final review
-
-Use this only after the individual runs succeed:
-
-```text
-Act as a strict reviewer. Compare ASSIGNMENT_BRIEF.md with this repository.
-
-Verify:
-1. All five required patterns exist and use low-level AI SDK calls.
-2. No agent framework replaced the manual workflow logic.
-3. npm run typecheck passes.
-4. Each individual npm script runs successfully.
-5. Real logs or screenshots exist for all five patterns.
-6. README explains every pattern.
-7. REFLECTION.md contains my real completed reflection.
-8. .env is ignored and no API key is tracked by Git.
-
-Do not fabricate run evidence or reflection text. Report what is still missing and fix only verifiable code/documentation issues.
-```
-
-## 12. Put the project on GitHub
-
-In the VS Code terminal:
-
-```bash
-git init
-git add .
-git status
-```
-
-Carefully confirm that `.env` is **not** listed. Then commit:
-
-```bash
-git commit -m "Build five AI agent workflow patterns"
-```
-
-On GitHub:
-
-1. Create a new repository.
-2. Set it to **Public**.
-3. Do not add another README, `.gitignore`, or license on GitHub because the starter already contains the needed project files.
-4. Copy GitHub's commands for pushing an existing repository.
-
-They will look similar to:
-
-```bash
-git branch -M main
-git remote add origin YOUR_GITHUB_REPOSITORY_URL
-git push -u origin main
-```
-
-Replace `YOUR_GITHUB_REPOSITORY_URL` with your real URL.
-
-Open the GitHub repository in your browser and verify:
+Before submitting the repository, I will verify:
 
 - All five pattern files are visible.
 - README displays correctly.
@@ -378,23 +313,23 @@ Open the GitHub repository in your browser and verify:
 - `.env` and the API key are absent.
 - The repository is public.
 
-Submit only the public GitHub repository URL to the course.
+The final course submission is the public GitHub repository URL.
 
 ## 13. Final checklist
 
-- [ ] Node.js 22 or newer is installed
-- [ ] `npm install` succeeds
-- [ ] `.env` contains a working API key and is not tracked
-- [ ] `npm run typecheck` succeeds
-- [ ] `npm run chain` succeeds
-- [ ] `npm run route` succeeds
-- [ ] `npm run parallel` succeeds
-- [ ] `npm run orchestrate` succeeds
+- [x] Node.js 22 or newer is installed
+- [x] `npm install` succeeds
+- [x] `.env` contains a working API key and is not tracked
+- [x] `npm run typecheck` succeeds
+- [x] `npm run chain` succeeds
+- [x] `npm run route` succeeds
+- [x] `npm run parallel` succeeds
+- [x] `npm run orchestrate` succeeds
 - [ ] `npm run evaluate` succeeds
-- [ ] Real execution logs or screenshots are saved
-- [ ] README explains the patterns
-- [ ] `REFLECTION.md` contains your real reflection
-- [ ] Repository is public on GitHub
+- [x] Real execution logs are saved for the completed patterns
+- [x] README explains the patterns
+- [ ] `REFLECTION.md` contains my real reflection
+- [x] Repository is public on GitHub
 - [ ] Public repository URL is ready to submit
 
 ## Why this lab matters
