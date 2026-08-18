@@ -1,0 +1,23 @@
+=== Pattern ===
+Parallelization
+
+=== Model ===
+gpt-oss:20b
+
+=== Original Input ===
+AI assistants can help students learn, but their answers must be checked for accuracy and privacy risks.
+
+=== Combined Parallel Results ===
+## Summary Worker
+- AI tools can supplement student learning but require verification for correctness.  
+- Educators and users must watch for privacy risks when relying on AI-generated content.
+
+## Risk Worker
+**1. Accuracy of the information** – AI assistants can produce plausible‑looking answers that are actually wrong, incomplete, or misleading. If students accept them without verifying, they risk learning incorrect concepts and developing faulty mental models.
+
+**2. Privacy concerns** – When students use AI tools, personal data (e.g., names, grades, problem content) may be transmitted to or stored by external servers. This can expose sensitive information, contravene privacy regulations, or allow unintended data sharing.
+
+## Question Worker
+1. **What concrete steps can teachers and students take to verify the correctness of information produced by AI assistants before it’s incorporated into coursework or assessments?**  
+2. **How can AI developers and educational institutions collaborate to design assistants that minimize privacy risks—such as data retention, location tracking, or inadvertent sharing of personally identifying information—to protect student confidentiality?**  
+3. **What guidelines or policies should schools implement to monitor and improve AI tool reliability over time, and how can these policies be communicated to students to encourage responsible, critical use of AI-generated content?**

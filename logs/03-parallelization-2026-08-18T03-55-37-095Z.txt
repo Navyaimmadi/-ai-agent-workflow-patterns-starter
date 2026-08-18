@@ -1,0 +1,23 @@
+=== Pattern ===
+Parallelization
+
+=== Model ===
+gpt-oss:20b
+
+=== Original Input ===
+Our school wants to use an AI chatbot to help students with homework. It can answer questions at any time, but it might
+  sometimes give incorrect answers or collect private student information.
+
+=== Combined Parallel Results ===
+## Summary Worker
+- The school plans to deploy an AI chatbot that offers round‑the‑clock homework assistance to students.  
+- However, the chatbot may give inaccurate answers and could potentially collect students’ private information.
+
+## Risk Worker
+**1. Inaccurate or misleading responses** – The chatbot may produce incorrect answers, which could misguide students and compromise learning quality.  
+**2. Privacy and data‑collection concerns** – The system might gather or store sensitive student information, raising privacy, security, and compliance issues.
+
+## Question Worker
+1. **What safeguards or verification processes are planned to catch or correct any incorrect answers the chatbot might give students?**  
+2. **How will the system handle personally identifying information (PII) to protect student privacy, and what encryption or data‑minimization measures will you implement?**  
+3. **Who will be responsible for monitoring the chatbot’s usage and reviewing its interactions—will there be a human editor, an automated audit log, or a mixed oversight model?**
