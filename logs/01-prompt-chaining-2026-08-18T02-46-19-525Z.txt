@@ -1,0 +1,165 @@
+=== Pattern ===
+Prompt Chaining
+
+=== Model ===
+gpt-oss:20b
+
+=== Original Input ===
+tell me about india
+
+=== Step 1 - Outline ===
+## India – Beginner’s Outline
+
+1. **Basic Facts**
+   - Official name: Republic of India
+   - Capital: New Delhi (official), largest city: Mumbai
+   - Founded: 15 August 1947 (independence from Britain)
+   - Population: ~1.4 billion (largest democracy)
+
+2. **Geography**
+   - Size: ~3.3 million km² (7th largest country)
+   - Borders: Pakistan (NW), Afghanistan & China (N), Nepal & Bhutan (NE), Bangladesh & Myanmar (E)
+   - Major regions: Himalayan north, Indo‑Gangetic plain, Thar Desert (west), Deccan plateau (central & south), coastal Maharashtra & Kerala
+
+3. **People & Languages**
+   - Diverse ethnic groups: Indo‑Aryan, Dravidian, tribal, etc.
+   - 22 constitutionally recognized languages; Hindi & English are official working languages
+   - Multilingual households common; regional languages dominate daily life
+
+4. **Religion**
+   - 80 % Hindu, 14 % Muslim, 2 % Christian, 1 % Sikh, 1 % Buddhist, 0.3 % Jain, others
+   - Religious festivals: Diwali, Holi, Eid, Christmas, Vaisakhi, etc.
+
+5. **Culture & Arts**
+   - Classical music (Hindustani, Carnatic), folk traditions
+   - Cinema: Bollywood (Hindi films) and regional film industries (Tamil, Telugu, Bengali, etc.)
+   - Cuisine: Rice in south, wheat in north; spices, dals, breads, diverse regional dishes
+
+6. **Economy**
+   - Emerging market; mixed economy: agriculture, services, manufacturing
+   - Key sectors: IT/Software, textiles, pharmaceuticals, automobiles, space & defense
+   - Growing middle class; foreign investment opportunities
+
+7. **Politics & Government**
+   - Federal parliamentary democracy
+   - President (ceremonial) + Prime Minister (executive)
+   - 28 states + 8 union territories, each with its own government
+   - Lok Sabha (House of People) & Rajya Sabha (Council of States) in Parliament
+
+8. **Education & Science**
+   - Literacy rate ~74 % (2023 projection)
+   - IITs, IIMs: world‑ranked institutes in engineering & management
+   - Space research: ISRO (independent space agency), satellite launch success
+
+9. **Tourism Highlights**
+   - Taj Mahal, Varanasi, Jaipur’s palaces, Kerala backwaters, Jaipur
+   - Natural wonders: Himalayan peaks (K2, Nanda Devi), waterfalls (Yamuna, Ganga), wildlife sanctuaries
+
+10. **Daily Life Essentials for Visitors**
+    - Currency: Indian Rupee (₹)
+    - Time zone: IST (UTC +5:30)
+    - Common etiquette: remove shoes in homes, respectful greetings, handkerchief for dry eyes
+    - Connectivity: widespread mobile networks, internet access in cities
+
+---
+
+**Quick Takeaway**  
+India is a vast, diverse country with deep cultural roots, a young and rapidly growing economy, and an immense demographic mosaic that shapes its global influence in politics, technology, and arts.
+
+=== Step 2 - Final Lesson ===
+## Mini‑Lesson:  “Getting to Know India”
+
+**Goal** – By the end of this lesson you’ll know why India is special: its geography, people, culture, and how it works as a country.
+
+---
+
+### 1. Where Is India? (Geography)
+
+| Pillar | What It Means |
+|--------|---------------|
+| **Size** | About **3.3 million km²** – it’s the 7th largest country in the world. |
+| **Borders** | Shares land borders with 7 countries: Pakistan, China, Nepal, Bhutan, Bangladesh, and Myanmar. |
+| **Main Regions** | • **Himalayan north** – snow‑capped mountains.<br>• **Indo‑Gangetic plain** – fertile fields that feed the world.<br>• **Thar Desert** – wide, arid sand in the west.<br>• **Deccan plateau** – central highlands.<br>• **Coastal belt** – stretch of sea along the south and east. |
+
+> **Quick fact:** Because of its varied geography, India has deserts, jungles, plains, and high mountains all in one country.
+
+---
+
+### 2. Who Lives Here? (People & Languages)
+
+| Theme | Details |
+|-------|---------|
+| **Population** | Roughly **1.4 billion people** – the largest democracy in the world. |
+| **Ethnic Slices** | • **Indo‑Aryan** (north and central)<br>• **Dravidian** (south)<br>• Many tribal groups<br>• Migrants bring even more diversity. |
+| **Languages** | 22 official groups, plus Hindi and English (working languages). A household often speaks two or three languages. |
+
+> **Picture:** Imagine a recipe that uses spices from eight different seasons – that’s the linguistic mix of India.
+
+---
+
+### 3. Beliefs & Traditions (Religion)
+
+- **Major religions:** Hinduism (≈80 %), Islam (≈14 %), Christianity (≈2 %), Sikhism, Buddhism, Jainism.  
+- **Festivals:** Diwali (lights), Holi (color), Eid (if Ramadan ends), Christmas, Vaisakhi, and many more.  
+- **Significance:** Festivals are not just celebrations – they mark seasons, harvests, and historic stories.
+
+---
+
+### 4. Life & Work (Culture & Economy)
+
+| Cultural Element | What Happens |
+|-------------------|--------------|
+| **Music & Art** | Classical *Hindustani* and *Carnatic* music; folk dances like Bhangra and Kathak. |
+| **Film** | *Bollywood* (Hindi) + regional industries (Tamil, Telugu, Bengali). |
+| **Food** | Rice in the south, wheat in the north; spices, lentils (dal), bread (roti, naan). |
+| **Economy** | Growing “emerging market” – agriculture, IT, textiles, pharma, cars, space. |
+| **Innovation** | *ISRO* (Indian Space Research Organisation) launched satellites and a Mars mission. |
+
+> **Takeaway:** India blends ancient traditions and cutting‑edge technology.
+
+---
+
+### 5. How Governance Works
+
+- **System** – Federal parliamentary democracy.  
+- **Key leaders** – President (ceremonial), Prime Minister (executive).  
+- **Sub‑units** – 28 states + 8 union territories, each with its own government.  
+- **Parliament** – Two houses: *Lok Sabha* (People’s House) and *Rajya Sabha* (States’ Council).
+
+---
+
+### 6. Education & Science
+
+- **Literacy** – Around 74 % (2023).  
+- **Institutes** – IITs (engineering), IIMs (management).  
+- **Space** – ISRO’s satellite launches are global news.
+
+---
+
+### 7. Visiting India – Practical Tips
+
+| Topic | What to Know |
+|-------|--------------|
+| **Money** | ₹ (Indian Rupee). |
+| **Time** | IST (UTC +5:30). |
+| **Etiquette** | Remove shoes in homes, greet with “Namaste” or “Hello,” use a handkerchief for blinks. |
+| **Connectivity** | Mobile & internet are widespread in cities; rural areas might be slower. |
+
+---
+
+## One Illustrative Example: The Spice of Life
+
+*Imagine a single bowl of **“Pav Bhaji”*** — a spicy mashed vegetable dish served with buttered bread. In this bowl, you’ll find:
+
+- **Tomatoes, onions, and capsicum** (fresh, local ingredients from the plains).  
+- **Basmati rice, coconut milk, and ginger** (from the coastal south).  
+- **Jalapeño pepper, chili powder, and garam masala** (a blend that symbolizes the humongous number of spices traded through India’s history).  
+- **A pinch of pistachio** (a nod to the ancient trade with Persia and China).  
+
+The dish is prepared, cooked, and enjoyed in the same kitchen, but the ingredients come from mountains, deserts, jungles, and oceans. That is India: a mixture of places, cultures, and flavors all worked into a single savory experience.
+
+---
+
+### ✅ Quick Takeaway
+
+India is a vast tapestry woven from diverse landscapes, languages, religions, and cultures. It’s a democratic powerhouse with an emerging economy, ancient traditions, and modern innovations—all of which make it a vibrant, influential country on the global stage.

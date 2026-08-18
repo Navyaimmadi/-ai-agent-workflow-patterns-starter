@@ -1,0 +1,30 @@
+{
+  "name": "ai-agent-workflow-patterns-starter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Beginner-friendly implementations of five core agent workflow patterns using the AI SDK.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "chain": "tsx src/patterns/01-prompt-chaining.ts",
+    "route": "tsx src/patterns/02-routing.ts",
+    "parallel": "tsx src/patterns/03-parallelization.ts",
+    "orchestrate": "tsx src/patterns/04-orchestrator-worker.ts",
+    "evaluate": "tsx src/patterns/05-evaluator-optimizer.ts",
+    "all": "tsx src/run-all.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^4.0.0",
+    "ai": "^7.0.0",
+    "dotenv": "^17.2.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}

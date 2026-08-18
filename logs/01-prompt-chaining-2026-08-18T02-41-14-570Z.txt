@@ -1,0 +1,153 @@
+=== Pattern ===
+Prompt Chaining
+
+=== Model ===
+gpt-oss:20b
+
+=== Original Input ===
+Create a beginner lesson about what an AI agent workflow is.
+
+=== Step 1 - Outline ===
+## Beginner Lesson Outline  
+**Topic:** What is an AI Agent Workflow?  
+
+| Section | What You’ll Cover | Why It Matters |
+|--------|------------------|----------------|
+| Learning Objectives | • Define “AI agent” and “workflow.” <br>• Identify the main stages a typical AI‑agent takes. <br>• Explain how those stages work together to solve a task. | Sets clear goals and lets learners see success at the end of the lesson. |
+| Prerequisites | Basic computer literacy; curiosity about AI. | Keeps the lesson accessible. |
+| Materials | • Short video or live demo (optional) <br>• Whiteboard or digital collaboration space <br>• One simple scenario card (e.g., “Order a pizza”) | Enables visual and hands‑on learning. |
+| 1. Introduction (5 min) | • Quick poll: “What is an AI agent?” <br>• Short definition: *An AI agent is a system that perceives its environment, reasons about it, decides on actions, and learns from the results.* | Captures attention and links to prior knowledge. |
+| 2. Core Concepts (10 min) | • Perception (inputs) <br>• Reasoning (planning, decision‑making) <br>• Action (executing commands) <br>• Learning (feedback loop) <br>• Sample Agent Types (robot, chat‑bot, recommendation engine) | Gives a mental map of the workflow. |
+| 3. The Workflow Diagram (10 min) | Visually map: <br>**Input → Perception → Reasoning → Action → Feedback → Update** <br>Use a simple flowchart or a Kahn‑style “loop.” | Reinforces stage names and their order. |
+| 4. Mini‑Example Walk‑Through (10 min) | Scenario: *AI assistant schedules a meeting.* <br>Step‑by‑step: <br>1. **Input**: Calendar data, emails. <br>2. **Perception**: Identify free slots, priority contacts. <br>3. **Reasoning**: Pick best slot, send invites. <br>4. **Action**: Create event, send invites. <br>5. **Feedback**: Wait for responses. <br>6. **Update**: Adjust schedule if changes come. | Shows the workflow in context. |
+| 5. Interactive Activity (10 min) | In pairs: pick a familiar tool (e.g., photo editor).  <br>Draw the AI agent workflow that could support it (e.g., photo‑enhancement assistant).  <br>Share one stage with the class. | Applies concepts, encourages collaboration. |
+| 6. Assessment / Reflection (5 min) | • Quick quiz: identify the missing stage in a partial workflow. <br>• One‑sentence reflection: “How does knowing the workflow help me design/choose AI tools?” | Measures knowledge and connects to personal experience. |
+| 7. Resources & Next Steps | • “AI for Everyone” by Andrew Ng (Audiobook/Podcast) <br>• OpenAI’s “Introduction to AI” videos <br>• Practice in a sandbox tool (e.g., Scratch AI, ChatGPT) | Provides pathways for deeper learning. |
+| 8. Closing (5 min) | Recap the 6‑stage loop.  Ask students to note one idea for where an agent could be useful in their own work or life. | Reinforces learning and sparks curiosity. |
+
+**Estimated Total Time**: ~60 minutes  
+**Delivery Modes**: In‑person, virtual synchronous, or flipped classroom (students review video beforehand).  
+
+Feel free to adjust durations or interactivity according to your class size and format!
+
+=== Step 2 - Final Lesson ===
+## Mini‑Lesson: “What Is an AI Agent Workflow?”  
+**Duration:** ~35 minutes (can be shortened or extended)
+
+---
+
+### 1. Objectives  
+By the end of this lesson you will be able to:
+
+| # | Learning Goal | Why It Helps |
+|---|---------------|--------------|
+| 1 | Define **AI agent** and **workflow** | Sets a shared vocabulary. |
+| 2 | List the **main stages** an AI agent goes through | Gives a mental map of the process. |
+| 3 | Explain how those stages work together to finish a task | Shows the big‑picture logic. |
+
+---
+
+### 2. What You’ll Need  
+- A whiteboard, flip‑chart, or shared digital canvas (Google Jamboard, Miro®, etc.)  
+- Sticky notes or colored markers (if in person)  
+- A hand‑out with a short “scenario card” (e.g., *“Order a pizza”*) – optional but helpful.  
+
+---
+
+### 3. Quick Warm‑up (3 min)
+
+| Prompt | What to Do | Goal |
+|--------|------------|------|
+| **Poll**: “What’s an AI to you?” | Ask a few volunteers to give a quick definition or example. | Activate prior knowledge and spark curiosity. |
+
+---
+
+### 4. 4‑Stage Definition (5 min)
+
+> **AI agent**: *A computer system that can perceive its environment, make decisions, take actions, and learn from what happens.*
+
+| Stage | What Happens | Everyday Analogy |
+|-------|--------------|------------------|
+| **Perception** | Collects data (inputs). | Reading an email |
+| **Reasoning** | Processes data, plans, decides. | Choosing which pizza toppings fit your dietary needs |
+| **Action** | Sends commands to the world. | Ordering the pizza over the phone |
+| **Learning** | Uses feedback to improve. | Noting that the pizza burned, you’ll call at a different time next time |
+
+> **Note:** Most frameworks add a *Feedback* or *Update* step that closes the loop.
+
+---
+
+### 5. Visual Workflow (6 min)
+
+1. **Input**  
+2. **Perception**  
+3. **Reasoning**  
+4. **Action**  
+5. **Feedback** (optional but standard)  
+6. **Update / Learning**
+
+```
+[Input] → [Perception] → [Reasoning] → [Action] → [Feedback] → [Update]
+        ^-----------------------------------------------------------------|
+```
+
+- Use the board to draw a circular arrow showing the cycle.  
+- Colour‑code each stage (e.g., blue = perception, green = reasoning).
+
+---
+
+### 6. One Mini‑Example: Ordering a Pizza (10 min)
+
+> **Scenario**: You want to order a pizza for dinner, but you’re also planning a surprise birthday next week. You want the pizza to fit your current cravings, not the surprise plan.  
+
+| Stage | How the AI Agent Works | What You Would See |
+|-------|------------------------|--------------------|
+| **Input** | The user (you) sends a request: “Order a pizza now.” | Text or voice command received by the AI. |
+| **Perception** | The agent reads your past orders, dietary cues, and even the calendar to see you’re not busy next week. | Recognises “no conflict” in the schedule. |
+| **Reasoning** | Decides on the best pizza (size, toppings) based on preferences and current offers. | Chooses a medium pepperoni pizza with a 10% discount. |
+| **Action** | Places the order via a pizza‑delivery API and confirms. | “Pizza is on its way—expected in 35 minutes.” |
+| **Feedback** | You receive the order confirmation and the delivery status. | “Delivered!” or “Delayed.” |
+| **Update / Learning** | If the pizza arrives late, the model flags the delivery time for future predictions. | Adjusts its recommendation window. |
+
+> **Takeaway**: Even a simple task involves a clear cycle of perception → reasoning → action → feedback → learning.  
+> This cycle makes the agent smarter over time.
+
+---
+
+### 7. Quick Interactive Activity (6 min)
+
+1. Pair up (or work in small groups).  
+2. Pick a daily routine you’re familiar with (e.g., “Sync your phone with the cloud,” “Set an alarm”).  
+3. On a sticky note or digital card, outline the **six stages** for that routine, using the pizza example as a model.  
+4. Share one interesting finding (e.g., a non‑obvious stage, a feedback loop that could improve the task).
+
+---
+
+### 8. Reflection & Check‑off (2 min)
+
+| Task | Instruction |
+|------|-------------|
+| **Quiz** | Match the stage to its description: *Perception, Reasoning, Action, Feedback, Update, Input.* (1 point each). |
+| **Micro‑reflection** | Write a quick sentence: “Knowing the workflow will help me choose better tools for ___.” |
+> Collect responses and note any common insights.  
+
+---
+
+### 9. Resources & Next Steps (2 min)
+
+- **Books**: *AI for Everyone* (Andrew Ng) – Chapter 3 “AI workflows.”  
+- **Videos**: “What Is an AI Agent?” – OpenAI Learning Hub, 5 min.  
+- **Hands‑On**: Try a basic chatbot in Scratch (select Text → Control → Pen) and experiment with a simple input–output loop.  
+
+---
+
+### 10. Closing (1 min)
+
+- Quick recap: *Input → Perception → Reasoning → Action → Feedback → Update*  
+- Ask: “Name one task you’ll try to model as an AI agent next week.”  
+
+---
+
+**Total Time**: 35 minutes  
+
+Feel free to stretch or compress any section based on the size of your group or the format of your class. Happy teaching!
