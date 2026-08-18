@@ -1,4 +1,10 @@
-import { generateText, Output } from "ai";
+import {
+  extractJsonMiddleware,
+  generateText,
+  NoObjectGeneratedError,
+  Output,
+  wrapLanguageModel,
+} from "ai";
 import { z } from "zod";
 import { getModel } from "../lib/ai";
 import {
@@ -28,17 +34,56 @@ const planSchema = z.object({
 
 export async function runOrchestratorWorker(input = defaultInput): Promise<string> {
   const { model, modelName } = getModel();
-
-  // The orchestrator dynamically decides which subtasks are needed.
-  const planResult = await generateText({
+  const structuredModel = wrapLanguageModel({
     model,
-    system:
-      "You are an orchestrator. Break the user's request into 2 to 4 independent subtasks that specialist workers can complete. Do not complete the task yourself.",
-    prompt: input,
-    output: Output.object({ schema: planSchema }),
+    middleware: extractJsonMiddleware(),
   });
 
-  const plan = planResult.output;
+  // The orchestrator dynamically decides which subtasks are needed.
+  let plan: z.infer<typeof planSchema>;
+  try {
+    const planResult = await generateText({
+      model: structuredModel,
+      system:
+        'You are an orchestrator. Return only a JSON object with exactly two properties: "goal" and "subtasks". The "goal" value must be a string. The "subtasks" value must be an array of 2 to 4 independent assignments. Every assignment must contain exactly three string properties: "id", "workerRole", and "task". Do not complete the tasks yourself, and do not add Markdown or extra text.',
+      prompt: input,
+      output: Output.object({
+        name: "orchestrator_plan",
+        description:
+          "A goal and 2 to 4 independent subtasks with an id, worker role, and task.",
+        schema: planSchema,
+      }),
+    });
+
+    plan = planResult.output;
+  } catch (error) {
+    if (NoObjectGeneratedError.isInstance(error)) {
+      let parsedResponse: unknown;
+
+      try {
+        parsedResponse = JSON.parse(error.text ?? "");
+      } catch {
+        throw new Error(
+          `Orchestrator returned JSON that could not be parsed. Raw response: ${error.text ?? "(no text returned)"}`,
+        );
+      }
+
+      const validation = planSchema.safeParse(parsedResponse);
+      if (validation.success) {
+        plan = validation.data;
+      } else {
+        const issues = validation.error.issues
+          .map((issue) => `${issue.path.join(".")}: ${issue.message}`)
+          .join("; ");
+
+        throw new Error(
+          `Orchestrator response failed schema validation: ${issues}. Raw response: ${error.text ?? "(no text returned)"}`,
+        );
+      }
+    } else {
+      throw error;
+    }
+  }
 
   // Each planned subtask becomes a worker call. The workers run in parallel.
   const workerOutputs = await Promise.all(
