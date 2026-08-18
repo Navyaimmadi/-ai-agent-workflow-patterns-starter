@@ -1,0 +1,205 @@
+=== Pattern ===
+Routing
+
+=== Model ===
+gpt-oss:20b
+
+=== Original Input ===
+Explain why my TypeScript Promise is not returning a value.
+
+=== Selected Route ===
+technical
+
+=== Router Reason ===
+User needs help debugging TypeScript Promise behavior.
+
+=== Specialist Response ===
+### Why a Promise “doesn’t seem to return a value”
+
+In TypeScript (and JavaScript in general) a **`Promise` is an *object*** that represents a value that will be available *at some point in the future*.  
+If you look at a Promise you can see three things that matter:
+
+| What | What it means | What you need to do |
+|------|----------------|----------------------|
+| `new Promise((resolve, reject) => …)` | You create a promise and give the **executor** a chance to *resolve* or *reject* it. | Inside the executor **call `resolve(value)`** once you have the value. |
+| `.then()` / `.catch()` / `await` | You *listen* for the value. | Return or `await` the result, or chain another promise. |
+| **Return type** | The type declared for the function (`Promise<T>`) tells the compiler what you’re supposed to get back. | Make sure the function actually *returns* that value inside `resolve()`. |
+
+If any of those pieces is missing or the wrong value is passed, the Promise will either stay pending forever or return `undefined`.
+
+Below are the most common pitfalls and how to fix them.
+
+---
+
+## 1. Forgetting to resolve the Promise
+
+```ts
+function getNumber(): Promise<number> {
+  return new Promise((resolve, reject) => {
+    // Imagine an async API call…
+    const result = 42;
+    // ❌ No resolve() called → the promise stays pending forever.
+  });
+}
+```
+
+### Fix
+
+```ts
+function getNumber(): Promise<number> {
+  return new Promise((resolve, reject) => {
+    const result = 42;
+    resolve(result);          // ← This is what makes the Promise *valueful*
+  });
+}
+```
+
+> **Tip** – If you’re already inside an async function just `return` the value; the compiler will automatically wrap it in a resolved Promise.
+
+---
+
+## 2. Returning a value *outside* the Promise
+
+```ts
+function getNumber(): Promise<number> {
+  const result = 42;
+  return result;            // ❌ Wrong: `result` is a number, not a Promise.
+}
+```
+
+### Fix
+
+```ts
+async function getNumber(): Promise<number> {
+  const result = 42;
+  return result;            // ✅ Works because async → automatically `Promise.resolve(result)`
+}
+```
+
+---
+
+## 3. Not using the resolved value when you call the function
+
+```ts
+async function getNumber(): Promise<number> {
+  return 42;
+}
+
+// Somewhere else
+getNumber();                // ❌ Nothing is done with the returned Promise
+console.log('Done');        // This line runs *before* the number is available
+```
+
+### Fix
+
+```ts
+// Using .then()
+getNumber().then(num => console.log('Number:', num));
+
+// OR using async/await inside another async function
+async function main() {
+  const num = await getNumber();
+  console.log('Number:', num);
+}
+main();
+```
+
+---
+
+## 4. Mixing `async`/`await` with manual `new Promise` in a wrong way
+
+```ts
+async function getNumber(): Promise<number> {
+  // ❌ Mixing `await` and manual resolve incorrectly
+  await new Promise((resolve) => resolve(42));
+}
+```
+
+The `await` above returns `42`, but the function itself **doesn’t `return` that value**, so it implicitly returns `undefined`.
+
+### Fix
+
+```ts
+async function getNumber(): Promise<number> {
+  const value = await new Promise((resolve) => resolve(42));
+  return value;               // ❌ Return the awaited value
+}
+```
+
+---
+
+## 5. Promise created but no error thrown or value resolved
+
+```ts
+function fetchData(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    fetch('https://api.example.com') // asynchronous but no `.then()` or `await`
+      .then(res => res.json())
+      .catch(err => reject(err));
+    // ❌ Missing resolve(...)
+  });
+}
+```
+
+### Fix
+
+```ts
+function fetchData(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    fetch('https://api.example.com')
+      .then(res => res.json())
+      .then(data => resolve(JSON.stringify(data))) // or whatever result you need
+      .catch(err => reject(err));
+  });
+}
+```
+
+---
+
+## Quick “cheat sheet”
+
+| Problem | What to do |
+|---------|------------|
+| No `resolve` inside executor | Call `resolve(value)` (or `reject(error)`). |
+| Returning a plain value from a non‑`async` function | Wrap the value in `Promise.resolve(value)` or make the function `async`. |
+| Ignoring the returned `Promise` | Use `.then()`, `.catch()`, or `await` to read the value. |
+| Mixing `async/await` and manual `new Promise` incorrectly | Either let `async` handle all promise logic, or if you write your own executor, be sure to `return`/`await` the resolved value. |
+| Promise stays pending forever | Check that you **do** call `resolve` or `reject` somewhere in every control‑flow path. |
+
+---
+
+## A Minimal, Working Example
+
+```ts
+// 1️⃣  A function that returns a Promise that resolves to a string
+async function fetchGreeting(): Promise<string> {
+  // Simulating an async operation (e.g., network request)
+  const simulatedAsync = new Promise<string>((resolve) => {
+    setTimeout(() => resolve('Hello, world!'), 500);
+  });
+
+  // 2️⃣  Await the promise *and* return the resolved value
+  const greeting = await simulatedAsync;
+  return greeting; // ✅ This is what callers will get
+}
+
+// 3️⃣  Consuming the promise
+async function showGreeting() {
+  const message = await fetchGreeting(); // Wait for the value
+  console.log(message);                  // → "Hello, world!"
+}
+
+showGreeting();
+```
+
+If you follow the structure above, your Promise will always produce a value that callers can read.  
+
+---
+
+### Bottom Line
+
+A Promise *doesn’t magically give you a value*; you must **resolve** it with a value, and the caller must **listen** for that resolution.  
+
+If you’re missing a `resolve()`, not returning the Promise at all, or ignoring the returned Promise, the value will never surface.  
+
+Check the three key spots—**resolve**, **return**, **consume**—and your Promise will work as expected.

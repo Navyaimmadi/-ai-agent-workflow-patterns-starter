@@ -1,0 +1,17 @@
+=== Pattern ===
+Routing
+
+=== Model ===
+gpt-oss:20b
+
+=== Original Input ===
+who's donald trump
+
+=== Selected Route ===
+general
+
+=== Router Reason ===
+informational request
+
+=== Specialist Response ===
+Donald Trump is an American businessman, television personality, and the 45th President of the United States (served 2017‑2021). He became famous as a real‑estate developer and host of the TV show *The Apprentice* before entering politics. He won the 2016 presidential election as the Republican nominee but lost the 2020 election to Joe Biden. Trump’s presidency was marked by controversial policy decisions, a polarizing style, and extensive media coverage. He remains an active public figure and frequently speaks on politics, business, and media topics.
