@@ -1,4 +1,10 @@
-import { generateText, Output } from "ai";
+import {
+  extractJsonMiddleware,
+  generateText,
+  NoObjectGeneratedError,
+  Output,
+  wrapLanguageModel,
+} from "ai";
 import { z } from "zod";
 import { getModel } from "../lib/ai";
 import {
@@ -23,6 +29,10 @@ const evaluationSchema = z.object({
 
 export async function runEvaluatorOptimizer(input = defaultInput): Promise<string> {
   const { model, modelName } = getModel();
+  const structuredModel = wrapLanguageModel({
+    model,
+    middleware: extractJsonMiddleware(),
+  });
   const history: string[] = [];
 
   // First create an initial draft.
@@ -36,15 +46,68 @@ export async function runEvaluatorOptimizer(input = defaultInput): Promise<strin
 
   // The maximum prevents an infinite feedback loop.
   for (let evaluationNumber = 1; evaluationNumber <= maximumEvaluations; evaluationNumber += 1) {
-    const evaluationResult = await generateText({
-      model,
-      system:
-        "You are a strict evaluator. Score the draft from 1 to 10 for correctness, clarity, instruction-following, and usefulness. Give specific feedback.",
-      prompt: `User request:\n${input}\n\nDraft to evaluate:\n${draft}`,
-      output: Output.object({ schema: evaluationSchema }),
-    });
+    let evaluation: z.infer<typeof evaluationSchema>;
 
-    const evaluation = evaluationResult.output;
+    try {
+      const evaluationResult = await generateText({
+        model: structuredModel,
+        system:
+          'You are a strict evaluator. Return only a JSON object with exactly three properties: "score", "strengths", and "improvements". The "score" value must be an integer from 1 to 10 based on correctness, clarity, instruction-following, and usefulness. The "strengths" and "improvements" values must be arrays of specific feedback strings. Always include "improvements"; use an empty array only when a score of 8 or higher needs no changes. Do not add Markdown or extra text.',
+        prompt: `User request:\n${input}\n\nDraft to evaluate:\n${draft}`,
+        output: Output.object({
+          name: "draft_evaluation",
+          description:
+            "A 1 to 10 score with lists of strengths and improvements.",
+          schema: evaluationSchema,
+        }),
+      });
+
+      evaluation = evaluationResult.output;
+    } catch (error) {
+      if (NoObjectGeneratedError.isInstance(error)) {
+        let parsedResponse: unknown;
+
+        try {
+          parsedResponse = JSON.parse(error.text ?? "");
+        } catch {
+          throw new Error(
+            `Evaluator returned JSON that could not be parsed. Raw response: ${error.text ?? "(no text returned)"}`,
+          );
+        }
+
+        let responseToValidate = parsedResponse;
+        if (
+          typeof parsedResponse === "object" &&
+          parsedResponse !== null &&
+          !Array.isArray(parsedResponse)
+        ) {
+          const responseObject = parsedResponse as Record<string, unknown>;
+          if (
+            typeof responseObject.score === "number" &&
+            responseObject.score >= qualityThreshold &&
+            responseObject.improvements === undefined
+          ) {
+            responseToValidate = { ...responseObject, improvements: [] };
+          }
+        }
+
+        const validation = evaluationSchema.safeParse(responseToValidate);
+        if (validation.success) {
+          evaluation = validation.data;
+        } else {
+          const issues = validation.error.issues
+            .map((issue) => `${issue.path.join(".")}: ${issue.message}`)
+            .join("; ");
+
+          throw new Error(
+            `Evaluator response failed schema validation: ${issues}. Raw response: ${error.text ?? "(no text returned)"}`,
+          );
+        }
+      } else {
+        throw error;
+      }
+    }
+
     history.push(
       `Evaluation ${evaluationNumber}\nDraft:\n${draft}\n\nEvaluation:\n${JSON.stringify(evaluation, null, 2)}`,
     );

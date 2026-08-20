@@ -1,0 +1,37 @@
+=== Pattern ===
+Evaluator-Optimizer
+
+=== Model ===
+gpt-oss:20b
+
+=== Original Input ===
+Explain how a black hole works to a 10-year-old in exactly 80 words. Include a playground analogy, define gravity and
+  event horizon, use a three-step numbered list, mention one common myth, avoid words longer than nine letters, and end with exactly: Nothing
+  escapes past the edge.
+
+=== Quality Threshold ===
+8
+
+=== Evaluation History ===
+Evaluation 1
+Draft:
+A black hole is like a strong whirl in space. Gravity pulls planets toward it. It has an edge called an event horizon. On a play area, a slide pulls you faster. 1. Drop a ball, it falls fast. 2. The pull grows nearer the edge. 3. Nothing can leave. Many think black holes swallow all light. When a star dies, it can collapse into a black hole. Its pull can bend light around it. Nothing escapes past the edge.
+
+Evaluation:
+{
+  "score": 10,
+  "strengths": [
+    "Exactly 80 words",
+    "Clear 10‑year‑old language",
+    "Includes playground analogy",
+    "Defines gravity and event horizon",
+    "Three‑step numbered list",
+    "Mentions a common myth",
+    "No words longer than nine letters",
+    "Ends with the exact required sentence"
+  ],
+  "improvements": []
+}
+
+=== Final Draft ===
+A black hole is like a strong whirl in space. Gravity pulls planets toward it. It has an edge called an event horizon. On a play area, a slide pulls you faster. 1. Drop a ball, it falls fast. 2. The pull grows nearer the edge. 3. Nothing can leave. Many think black holes swallow all light. When a star dies, it can collapse into a black hole. Its pull can bend light around it. Nothing escapes past the edge.

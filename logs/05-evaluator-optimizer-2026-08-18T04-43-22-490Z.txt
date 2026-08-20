@@ -1,0 +1,46 @@
+=== Pattern ===
+Evaluator-Optimizer
+
+=== Model ===
+gpt-oss:20b
+
+=== Original Input ===
+Explain prompt chaining to a beginner in under 130 words and include one concrete example.
+
+=== Quality Threshold ===
+8
+
+=== Evaluation History ===
+Evaluation 1
+Draft:
+**Prompt chaining** is a technique where you use one AI answer as the next prompt.  
+You start with a question, let the model reply, then take that reply (or a part of it) and feed it back into the model as a new prompt.  
+This guides the model step‑by‑step, keeping the output on track and letting you build complex tasks from simple ones.
+
+**Example**  
+1. Prompt: “Outline a sci‑fi story about a time‑traveling engineer.”  
+2. LLM returns an outline.  
+3. Next prompt: “Using that outline, write the opening paragraph.”  
+The second prompt relies on the outline, producing a coherent, detailed start.
+
+Evaluation:
+{
+  "score": 9,
+  "strengths": [
+    "Concise explanation suitable for beginners",
+    "Clear, step-by-step description",
+    "Provides a concrete, practical example"
+  ],
+  "improvements": []
+}
+
+=== Final Draft ===
+**Prompt chaining** is a technique where you use one AI answer as the next prompt.  
+You start with a question, let the model reply, then take that reply (or a part of it) and feed it back into the model as a new prompt.  
+This guides the model step‑by‑step, keeping the output on track and letting you build complex tasks from simple ones.
+
+**Example**  
+1. Prompt: “Outline a sci‑fi story about a time‑traveling engineer.”  
+2. LLM returns an outline.  
+3. Next prompt: “Using that outline, write the opening paragraph.”  
+The second prompt relies on the outline, producing a coherent, detailed start.
